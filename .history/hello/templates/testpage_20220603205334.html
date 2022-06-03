@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block title %}Test{% endblock %}
+
+{% block header %}
+<!-- Navbar -->
+<nav class="navbar navbar-default shadow position-sticky fixed-top bg-white ">
+  <div class="container">
+    <div class="navbar-header">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'home' %}"><img src="../static/images/logopython.svg" alt="logo"></a>
+    </div>
+    <div id="myNavbar">
+      <ul class="nav justify-content-center ">
+        <li><a href="{% url 'home' %}" class="p-2 text-dark font-weight-bold text-decoration-none ">HOME</a></li>
+        <li><a href="{% url 'svm_imoc' %}" class="p-2 text-dark font-weight-bold text-decoration-none ">SVM One
+            Class</a>
+        </li>
+        <li><a href="{% url 'test' %}" class="p-2 text-dark font-weight-bold text-decoration-none active">TEST</a></li>
+        <li>
+
+          <div class="dropdown">
+            <a class="p-2 text-dark font-weight-bold text-decoration-none dropdown-toggle" style="letter-spacing:1px"
+              data-toggle="dropdown">Chào mừng Admin</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" style="letter-spacing:1px" href="{% url 'logout' %}">Đăng Xuất</a>
+            </div>
+          </div>
+
+
+
+        </li>
+        <li><a>
+            <img src="../static/images/accout.svg"
+              style="border-radius:50%;border:1px solid black;width:3em;top:100%;transform:translateY(-25%)" />
+          </a>
+      </ul>
+    </div>
+  </div>
+
+  </div>
+</nav>
+{% endblock %}
+
+
+
+{% block content %}
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+  <h3 class="margin">TEST?</h3>
+  <p>
+    This part is used to try algorithms and compare with SVM algorithm IMOC!!!
+  </p>
+  <p></p>
+</div>
+
+
+<!-- form -->
+<div class="container-fluid bg-2" style="height: 50vh; max-height:100vh">
+  <div class="container bg-info p-4 rounded shadow"
+    style="position: absolute;top :35vh;left:50%;transform:translateX(-50%)">
+    <form class="was-validated " method="post" action="{% url 'process_test' %}"enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="select">Algorithm</label>
+      <select class="custom-select" name="select">
+        <option value="GaussianNB_func">Naive Bayes(GaussianNB)</option>
+        <option value="DecisionTreeClassifier_func">Decision Tree</option>
+        <option value="KNeighborsClassifier_func">K-Nearest Neighbors</option>
+        <option value="BernoulliNB_func">BernoulliNB</option>
+        <option value="ExtraTreeClassifier_func">ExtraTreeClassifier</option>
+        <option value="BaggingClassifier_func">Bagging classifier</option>
+        <option value="AdaBoostClassifier_func">AdaBoost Classifier</option>
+        <option value="MLPClassifier_func">MLPClassifier</option>
+        <option value="LinearDiscriminantAnalysis_func">Linear Discriminant Analysis</option>
+        <option value="RandomForestClassifier_func">RandomForestClassifier</option>
+      </select>
+      <div class="p-0 col-12 my-3 d-flex flex-row justify-content-between">
+        <div class="input-group col-3 p-0 ">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-dark text-white">Number of Age</span>
+          </div>
+          <input type="number" class="form-control" min="1" placeholder="Enter Number of Cut..." value="1">
+        </div>
+        <div class="input-group col-3 p-0 ">
+          <input type="number" class="form-control" min="1" placeholder="Enter Number of Age..." value="1">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-dark text-white">Number of Cuts</span>
+          </div>
+        </div>
+      </div>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile" name="file-csv-open" accept=".csv">
+        <label class="custom-file-label label-browser" for="customFile" name='label-browser'>Select the file with .csv
+          extension to execute the test</label>
+      </div>
+
+        {% if img %}
+        <img src="">
+      <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-primary shadow col-4">RUN</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<style>
+  .custom-file-input:lang(en)~.custom-file-label::after {
+    content: "Choose File";
+  }
+</style>
+<script>
+  // Add the following code if you want the name of the file appear on select
+  $(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+</script>
+<!-- end form -->
+{% endblock %}
+{% block footer %}
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <p>
+    Website Made By
+    <a href="https://www.facebook.com/hoangkhang2k/">Vũ Hoàng Khang</a>
+  </p>
+</footer>
+
+{% endblock%}
