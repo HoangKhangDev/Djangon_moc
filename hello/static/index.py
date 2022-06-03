@@ -128,6 +128,6 @@ def Select_Model(path_open, path_save, n=20, k=3, ChooseModel="GaussianNB"):
         arr_nu.append(trainx)
         arr_gamma.append(trainy)
         fs.write(f"{i} {accuracy}\n")
-    # shutil.rmtree(path_save_parent)
-    # shutil.rmtree(path_save)
+    shutil.rmtree(path_save_parent)
+    shutil.rmtree(path_save+'/bieudo')
     return arr_nu, arr_gamma, arr, x_ve
